@@ -1,0 +1,22 @@
+//Today is day 1 of my 100 days coding . i m already practising questions on leetcode from past 10 days to build the momentum . i try to solve 3 -4 problems a day.
+//thank you . stay tuned
+//
+
+//balanced binary tree
+
+class Solution {
+public:
+    int check(TreeNode* root){
+        if(root==nullptr) return 0;
+        int lh=check(root->left);
+        if(lh==-1) return -1;
+        int rh=check(root->right);
+        if(rh==-1) return -1;
+        if(abs(lh-rh)>1) return -1;
+        else 
+        return max(lh,rh)+1;
+    }
+    bool isBalanced(TreeNode* root) {
+      return check(root)!=-1;  
+    }
+};
