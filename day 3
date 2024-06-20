@@ -1,0 +1,49 @@
+ //today is day 3
+//no of island
+class Solution {
+      public:
+      
+     void bfs(vector<vector<char>>&grid,int row,int col,queue<pair<int,int>>&que){
+         int n = grid.size();
+        int m=grid[0].size();
+       
+       grid[row][col]='$';
+        que.push({row,col});
+        while(!que.empty()){
+            int row=que.front().first;
+            int col=que.front().second;
+            que.pop();
+            for(int delrow=-1 ; delrow<=1 ;delrow++){
+                for(int delcol=-1 ;delcol<=1 ;delcol++){
+                    int nrow=row+delrow;
+                    int ncol=col+delcol;
+                    if(nrow>=0 &&nrow<n &&ncol>=0 &&ncol<m && grid[nrow][ncol]=='1'){
+                        
+                        que.push({nrow,ncol});
+                        grid[nrow][ncol]='$';
+                    }
+                }
+            }
+        }
+     }
+ 
+    // Function to find the number of islands.
+    int numIslands(vector<vector<char>>& grid) {
+        if(grid.size()==0) return 0;
+         int n = grid.size();
+        int m=grid[0].size();
+        int cnt=0;
+        queue<pair<int,int>>que;
+        for(int row=0;row<n;row++){
+            for(int col=0;col<m;col++){
+                if( grid[row][col]=='1'){
+                    
+                    bfs(grid,row,col,que);
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+        
+    }
+};
